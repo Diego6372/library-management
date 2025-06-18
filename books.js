@@ -1,3 +1,10 @@
+// Show Add Book Modal
+function showAddBookModal() {
+    document.getElementById('modalTitle').textContent = 'Add New Book';
+    document.getElementById('bookForm').reset(); // Reset the form fields
+    document.getElementById('bookForm').dataset.mode = 'add'; // Set mode to add
+    document.getElementById('bookModal').classList.remove('hidden'); // Show the modal
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize books from localStorage or use default data
     if (!localStorage.getItem('books')) {
