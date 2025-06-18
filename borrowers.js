@@ -1,30 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize borrowers from localStorage or use default data
-    if (!localStorage.getItem('borrowers')) {
-        const defaultBorrowers = [
-            {
-                id: 1,
-                name: "John Doe",
-                email: "john.doe@example.com",
-                phone: "+1-555-0123",
-                address: "123 Library Street, Booktown, BT 12345",
-                memberId: "LIB-2024-001",
-                status: "active",
-                borrowedBooks: 2
-            },
-            {
-                id: 2,
-                name: "Jane Smith",
-                email: "jane.smith@example.com",
-                phone: "+1-555-0124",
-                address: "456 Reading Avenue, Booktown, BT 12345",
-                memberId: "LIB-2024-002",
-                status: "active",
-                borrowedBooks: 1
-            }
-        ];
-        localStorage.setItem('borrowers', JSON.stringify(defaultBorrowers));
-    }
+    loadBorrowers(); // Load borrowers when the page is loaded
+});
+// Load and display borrowers
+function loadBorrowers() {
+    const borrowers = JSON.parse(localStorage.getItem('borrowers')) || [];
+    const tableBody = document.getElementById('borrowersTableBody');
+    tableBody.innerHTML = '';
+    borrowers.forEach(borrower => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">${borrower.name}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${borrower.email}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${borrower.id}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${borrower.status}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${borrower.booksBorrowed.join(', ')}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <button onclick="editBorrower(${borrower.id})" class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                <button onclick="deleteBorrower(${borrower.id})" class="text-red-600 hover:text-red-900">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
 
     // Load and display borrowers
     loadBorrowers();
