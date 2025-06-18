@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Simulate authentication (replace with actual authentication in production)
-            if (username === 'admin' && password === 'admin123') {
+            if (username === 'rajat' && password === 'rajat123') {
                 // Store authentication state
                 localStorage.setItem('isAuthenticated', 'true');
                 localStorage.setItem('user', JSON.stringify({
