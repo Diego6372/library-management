@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrowers Management - Library Management System</title>
-    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -17,7 +14,6 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
     <nav class="bg-indigo-600 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -28,15 +24,9 @@
                     </a>
                 </div>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Dashboard</a>
-                        <a href="books.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Books</a>
-                        <a href="borrowers.html" class="px-3 py-2 rounded-md text-sm font-medium bg-indigo-700">Borrowers</a>
-                        <a href="due_dates.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Due Dates</a>
-                        <button onclick="logout()" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Logout</button>
-                    </div>
+                    <div id="desktop-nav-links" class="ml-10 flex items-baseline space-x-4">
+                        </div>
                 </div>
-                <!-- Mobile menu button -->
                 <div class="md:hidden">
                     <button type="button" class="mobile-menu-button p-2 rounded-md inline-flex items-center justify-center">
                         <i class="fas fa-bars"></i>
@@ -44,27 +34,18 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile menu -->
         <div class="hidden md:hidden mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-700">Dashboard</a>
-                <a href="books.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-700">Books</a>
-                <a href="borrowers.html" class="block px-3 py-2 rounded-md text-base font-medium bg-indigo-700">Borrowers</a>
-                <a href="due_dates.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-700">Due Dates</a>
-                <button onclick="logout()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-indigo-700">Logout</button>
-            </div>
+            <div id="mobile-nav-links" class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                 </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <!-- Header -->
         <div class="px-4 py-6 sm:px-0">
             <h1 class="text-3xl font-bold text-gray-900">Borrowers Management</h1>
             <p class="mt-2 text-sm text-gray-600">Manage library members and their borrowing records</p>
         </div>
 
-        <!-- Search Section -->
         <div class="bg-white shadow rounded-lg p-6 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -87,7 +68,6 @@
             </div>
         </div>
 
-        <!-- Borrowers Table -->
         <div class="bg-white shadow rounded-lg overflow-hidden">
             <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Borrower List</h3>
@@ -109,43 +89,24 @@
                         </tr>
                     </thead>
                     <tbody id="borrowersTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Borrowers will be dynamically added here -->
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
-            <!-- Pagination -->
             <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-                <div class="flex-1 flex justify-between sm:hidden">
-                    <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</button>
-                    <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</button>
-                </div>
                 <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                     <div>
-                        <p class="text-sm text-gray-700">
-                            Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">20</span> results
-                        </p>
+                        <p id="pagination-summary" class="text-sm text-gray-700">
+                           </p>
                     </div>
                     <div>
-                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                            <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                <span class="sr-only">Previous</span>
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</button>
-                            <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</button>
-                            <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</button>
-                            <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                <span class="sr-only">Next</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </nav>
+                        <nav id="pagination-controls" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Borrower Modal -->
     <div id="borrowerModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -186,7 +147,6 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
     <div id="deleteModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -217,7 +177,6 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/borrowers.js"></script>
